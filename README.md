@@ -114,6 +114,56 @@ Other recent gputils/Python versions should work; these are just what was tested
 4. Under **Production**, enable **Allow Export Hex**.
 5. Under **Power**, enable **Power target circuit board from PICkit** (5 V).
 
+### Wiring the PICkit 3 to the display board
+
+The display PCB has an **unpopulated 5-pin ICSP header** (through-holes only, no pin header
+soldered in). You can program the chip in-circuit — no desoldering required.
+
+**Safety:** disconnect the display board from the grinder's power/control harness before
+connecting the PICkit. This isolates the board from the rest of the machine, so there's no
+risk of back-powering the grinder's motor relay or power supply through the programming
+header. The PICkit powers just the display board for the read/write.
+
+**Physical connection:** press 5 male-male DuPont wires into the holes. The contact is reliable
+enough for the few seconds a read or write takes — no soldering needed, though you can solder a
+header on if you prefer.
+
+**Identifying pin 1:** on the board the pin-1 pad is **square** (the other four are round).
+Pin 1 is also closest to the PIC microcontroller (the 28-pin SOIC chip). If in doubt, trace
+continuity from the chip's pin 1 (`RE3/MCLR/VPP`) to the header pad — that's pin 1.
+
+**Board pinout** (5-pin ICSP header, pin 1 = square pad):
+
+| Board pin | Signal    | Connects to PICkit 3 pin |
+|-----------|-----------|--------------------------|
+| 1         | MCLR/VPP  | 1 (MCLR/VPP)             |
+| 2         | VDD (+5V) | 2 (VDD)                  |
+| 3         | VSS (GND) | 3 (VSS)                  |
+| 4         | ICSPDAT   | 4 (PGD)                  |
+| 5         | ICSPCLK   | 5 (PGC)                  |
+
+The PICkit 3 has a 6-pin connector; **pin 6 (LVP) is left unconnected**. The board's 5 pins
+map 1:1 to PICkit 3 pins 1–5.
+
+**PICkit 3 pinout** (for reference — the programmer's pin 1 is usually marked with a triangle
+or arrow on the case, and the cable's pin-1 wire is typically a different colour):
+
+| PICkit 3 pin | Signal   | Wire colour (typical) |
+|--------------|----------|-----------------------|
+| 1            | MCLR/VPP | white or purple       |
+| 2            | VDD      | red                   |
+| 3            | VSS      | black                 |
+| 4            | PGD      | yellow or grey        |
+| 5            | PGC      | green                 |
+| 6            | LVP      | blue (unused here)    |
+
+**Power:** with *Power target circuit board from PICkit* enabled, the PICkit supplies 5 V to
+the board during programming. The grinder's own power switch can be **off** — the PICkit
+powers just the display board through the ICSP header.
+
+**After programming:** disconnect the PICkit, power-cycle the grinder with its hard switch,
+and the new firmware runs.
+
 ### Patch steps
 
 1. **Read your own chip** with MPLAB IPE (Connect → Read → File → Export → Hex) and save the dump as
