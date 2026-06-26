@@ -204,7 +204,7 @@ cross-reference and are credited here:
   <https://denshaotoko.github.io/blog/2024/10/31/eureka-touchscreen-repair.html>
 - Toolless repair (the ~23-minute minus-hold workaround) —
   <https://denshaotoko.github.io/blog/2025/09/06/eureka-touchscreen-toolless-repair.html>
-- Display problem & MPLAB IPE flashing guide —
+- Display problem blog —
   <https://kaffeemacher.de/en/blogs/kaffeewissen/eureka-mignon-display-problem>
 
 ## License
